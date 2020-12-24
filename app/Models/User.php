@@ -63,6 +63,16 @@ class User extends Authenticatable
     }
 
     /**
+     * Do something before save User
+     * 
+     * @return void
+     */
+    public function beforeStore()
+    {
+        $this->password = bcrypt($this->password);
+    }
+
+    /**
      * Use email instead of id
      * 
      * @return string
