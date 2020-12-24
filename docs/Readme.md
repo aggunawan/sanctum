@@ -9,5 +9,6 @@ contoh untuk dokumentasi "GET /user" akan berada pada file "docs/user/get.md"
 
 ### Tested
 1. Register
+2. Login
 
 Last edit: 2020-12-24
