@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\Constant;
+use App\Traits\Showable;
 use App\Traits\Storeable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -12,7 +13,7 @@ use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable, HasApiTokens, Storeable;
+    use HasFactory, Notifiable, HasApiTokens, Storeable, Showable;
 
     /**
      * Generated Token
@@ -58,6 +59,28 @@ class User extends Authenticatable
      */
     public function afterStore()
     {
+        $this->setToken();
+    }
+
+    /**
+     * Use email instead of id
+     * 
+     * @return string
+     */
+    public function getRouteKeyName()
+    {
+        return 'email';
+    }
+
+    /**
+     * Set access_token to $token props
+     * 
+     * @return self
+     */
+    public function setToken()
+    {
         $this->token = $this->createToken(Constant::TOKEN())->plainTextToken;
+        
+        return $this;
     }
 }

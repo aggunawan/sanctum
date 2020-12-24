@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\RegisterStoreRequest;
+use App\Http\Requests\LoginStoreRequest as Request;
 use App\Http\Resources\User as UserResource;
 use App\Models\User;
 
-class RegisterController extends Controller
+class LoginController extends Controller
 {
     /**
      * Handle the incoming request.
@@ -15,10 +15,11 @@ class RegisterController extends Controller
      * @param  \App\Models\User             $user
      * @return \Illuminate\Http\Response
      */
-    public function __invoke(RegisterStoreRequest $request, User $user)
+    public function __invoke(Request $request, User $user)
     {
-        $createdUser = $user->store($request->validated());
+        $user = $user->show($request->get('email'));
+        $user->setToken();
 
-        return new UserResource($createdUser);
+        return new UserResource($user);
     }
 }

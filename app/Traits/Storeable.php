@@ -8,7 +8,7 @@ trait Storeable
 	 * Store operation for class that use this traits
 	 * 
 	 * @param  array  $payload
-	 * @return self
+	 * @return \Illuminate\Database\Eloquent\Model
 	 */
 	public function store(array $payload)
 	{

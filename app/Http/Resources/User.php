@@ -16,8 +16,8 @@ class User extends JsonResource
     public function toArray($request)
     {
         return [
-            'message' => Constant::HTTP_CREATED_MESSAGE(),
-            'code' => Constant::HTTP_CREATED_CODE(),
+            'message' => $this->wasRecentlyCreated ? Constant::HTTP_CREATED_MESSAGE() : Constant::HTTP_SUCCESS_MESSAGE(),
+            'code' => $this->wasRecentlyCreated ? Constant::HTTP_CREATED_CODE() : Constant::HTTP_SUCCESS_CODE(),
             'data' => [
                 'name' => $this->name,
                 'email' => $this->email,
