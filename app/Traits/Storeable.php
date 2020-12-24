@@ -15,9 +15,9 @@ trait Storeable
 		$filteredPayload = $this->filterStorePayload($payload);
 		$className = get_class($this);
 
-		$storedObject = new $className;
+		$storedObject = new $className($filteredPayload);
 		$storedObject->beforeStore();
-		$storedObject = $storedObject->create($filteredPayload);
+		$storedObject->save();
 		$storedObject->afterStore();
 
 		return $storedObject;
