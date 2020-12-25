@@ -5,6 +5,7 @@ namespace Tests\Feature\Me;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Support\Str;
 use Tests\TestCase;
 
 class GetTest extends TestCase
@@ -54,5 +55,19 @@ class GetTest extends TestCase
                     'token'
                 ]
             ]);
+    }
+
+    public function testGetUserWithInvalidToken()
+    {
+        $token = Str::random();
+
+        $response = $this
+            ->withHeaders([
+                'Authorization' => "Bearer $token",
+                'accept' => 'application/json'
+            ])
+            ->get('/api/me');
+
+        $response->assertStatus(401);
     }
 }
