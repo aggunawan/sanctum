@@ -20,7 +20,7 @@ class StoreTest extends TestCase
         $name = $this->faker->name();
         $email = $this->faker->email();
 
-        $response = $this->post('/api/register', [
+        $response = $this->post('/register', [
             'name' => $name,
             'email' => $email,
             'password' => $this->faker->password(),
