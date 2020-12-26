@@ -18,7 +18,11 @@ class FortifyServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->singleton(\Laravel\Fortify\Contracts\LoginResponse::class, function () {
+            auth()->user()->setToken();
+
+            return new \App\Http\Resources\User(auth()->user());
+        });
     }
 
     /**
