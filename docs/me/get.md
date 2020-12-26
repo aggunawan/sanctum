@@ -1,4 +1,4 @@
-## Endpoint `/me`
+## Endpoint `/v1/me`
 ## Method `GET`
 
 ## Headers
@@ -17,4 +17,4 @@
 }
 ```
 
-Last updated: 2020-12-24
+Last updated: 2020-12-25

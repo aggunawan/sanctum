@@ -34,7 +34,7 @@ class GetTest extends TestCase
             ->withHeaders([
                 'Authorization' => "Bearer $token"
             ])
-            ->get('/api/me');
+            ->get('/v1/me');
 
         $response->assertStatus(200)
             ->assertJson([
@@ -66,7 +66,7 @@ class GetTest extends TestCase
                 'Authorization' => "Bearer $token",
                 'accept' => 'application/json'
             ])
-            ->get('/api/me');
+            ->get('/v1/me');
 
         $response->assertStatus(401);
     }
