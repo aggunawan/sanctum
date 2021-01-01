@@ -15,8 +15,8 @@ class StoreTest extends TestCase
      */
     public function testLoginSuccessfully()
     {
-        $response = $this->post('/login', [
-            'email' => 'agunggunawan.debian@gmail.com',
+        $response = $this->postJson('/login', [
+            'email' => 'dummy@mail.com',
             'password' => 'secret',
         ]);
 
@@ -26,7 +26,7 @@ class StoreTest extends TestCase
                 'code' => 200,
                 'data' => [
                     'name' => 'Dummy User',
-                    'email' => 'agunggunawan.debian@gmail.com',
+                    'email' => 'dummy@mail.com',
                 ]
             ])
             ->assertJsonStructure([
