@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Log;
 
 class User extends Authenticatable
 {
@@ -60,6 +61,8 @@ class User extends Authenticatable
     public function afterStore()
     {
         $this->setToken();
+
+        Log::info('register success for user ' . $this->email);
     }
 
     /**
@@ -69,6 +72,13 @@ class User extends Authenticatable
      */
     public function beforeStore()
     {
+        $payload = collect([
+            'name' => $this->name,
+            'email' => $this->email,
+        ])->toJson();
+
+        Log::info('register request with payload ' . $payload);
+
         $this->password = bcrypt($this->password);
     }
 
@@ -89,6 +99,8 @@ class User extends Authenticatable
      */
     public function setToken()
     {
+        Log::info('authorization generated for user ' . $this->email);
+
         $this->token = $this->createToken(Constant::TOKEN())->plainTextToken;
         
         return $this;
